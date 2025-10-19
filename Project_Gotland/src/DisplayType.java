@@ -1,7 +1,35 @@
+/*
+ *  DisplayType Class
+ *      Defines the type of display (Table, Chilled Counter, Refrigerator, Shelf)
+ *
+ */
+
 public class DisplayType {
 
-    private String type;        // ex: "Table", "Chilled Counter"
+    // Fields
+    private String typeName;        // ex: "Table", "Chilled Counter"
     private int tiers;
-    private tierCapacity;
+    private int capacityPerTier;
+
+    // Constructor
+    public DisplayType(String typeName, int tiers, int capacityPerTier) {
+        this.typeName = typeName;
+        this.tiers = tiers;
+        this.capacityPerTier = capacityPerTier;
+    }
+
+
+    // Getter
+    public String getType() {
+        return this.typeName;
+    }
+
+    public int getTiers() {
+        return this.tiers;
+    }
+
+    public int getTotalCapacity() {
+        return tiers * capacityPerTier;
+    }
 
 }
