@@ -27,5 +27,4 @@ public class ProductType {
         this.foodConsumable = foodConsumable;
         this.drinkConsumable = drinkConsumable;
     }
-
 }
