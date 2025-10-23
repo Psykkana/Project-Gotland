@@ -1,4 +1,3 @@
-
 /* 
  *  Supermarket Class
  *      Does the initialization of the actual supermarket
@@ -9,7 +8,7 @@
 
 public class Supermarket {
     
-    private Floor GroundFloor;
+    private Floor Floor;
     // Shopper declaration here
     private boolean running;   
 
@@ -24,8 +23,8 @@ public class Supermarket {
     public void initialize() {
         // Create Map
         System.out.println("Initializing Supermarket Simulation...");
-        GroundFloor = new Floor(); 
-        GroundFloor.initializeMap(1);   // Initialize Floor 1
+        Floor = new Floor("Ground Floor"); 
+        Floor.initializeMap(1);   // Initialize Floor 1
         // Generate shopper here
         System.out.println("Creating Shopper Profile...");
 
@@ -33,22 +32,23 @@ public class Supermarket {
 
     // Start simulation
     public void startSimulation() {
-        // Spawn shopper at X = 11, Y = 20
-        GroundFloor.setTile(11, 20, 'U');
+        // Spawn shopper at Y = 20, X = 11
+        Floor.setTile(20, 11, 'U');
 
         System.out.println("Generating Map...");  
         displayDivider();      
 
         while (running) {
-            GroundFloor.printMap();        // Print Floor 1
+            Floor.printMap();        // Print Floor 1
             System.out.println("    W/A/S/D to Move, I/J/K/L to Look");
+            break;  // to be removed when shopper can be integrated
         }
 
 
     }
 
     private void handleInput(char input) {
-        
+
 
     }
 
