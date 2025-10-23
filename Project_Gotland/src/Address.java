@@ -1,3 +1,13 @@
+/*
+ *  Address Class
+ *      The actual display unit in the supermarket
+ *      The actual display unit in the supermarket
+ *      Contains several Products
+ *      Can be multi-tiered
+ *      Has an address and capacity
+ *
+ */
+
 public class Address {
     
     private String floor;           // ex: GF or 2F
@@ -6,12 +16,12 @@ public class Address {
     private int displayNum;
 
     // Constructor
-    public Address(String floor, String grouping, int groupNum, int displayNum) [
+    public Address(String floor, String grouping, int groupNum, int displayNum) {
         this.floor = floor;
         this.grouping = grouping;
         this.groupNum = groupNum;
         this.displayNum = displayNum;
-    ]
+    }
 
     public String getFloor() {
         return this.floor;

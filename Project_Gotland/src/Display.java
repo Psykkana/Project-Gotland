@@ -15,7 +15,7 @@ public class Display {
 
     private DisplayType type;
     private ArrayList<Product> productList;
-    // NOTE: How do we implement an address?
+    private Address address;
     
     // Constructor
     public Display(DisplayType type, ArrayList<Product> productList) {
