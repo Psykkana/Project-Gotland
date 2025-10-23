@@ -54,8 +54,8 @@ public class Driver {
         Supermarket supermarket = new Supermarket();
 
         // Start simulation loop
-
-
+        supermarket.initialize();
+        displayDivider();
 
         scanner.close();    
     }

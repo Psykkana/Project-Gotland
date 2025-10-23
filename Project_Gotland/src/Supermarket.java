@@ -16,6 +16,13 @@ public class Supermarket {
     
 
     public void initialize() {
+        System.out.println("Initializing Supermarket Simulation...");
+        Floor GroundFloor = new Floor();
+
+        System.out.println("Initializing Map...");
+        GroundFloor.initializeMap(1);   // Floor 1
+
+        GroundFloor.printMap();
 
     }
 
