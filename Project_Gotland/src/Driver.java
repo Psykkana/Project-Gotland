@@ -50,12 +50,12 @@ public class Driver {
         // Create shopper
         // Shopper shopper = new Shopper(shopperName, shopperAge);
 
-        // Create and initialize supermarket
+        // Create supermarket
         Supermarket supermarket = new Supermarket();
 
-        // Start simulation loop
+        // Initialize supermarket
         supermarket.initialize();
-        displayDivider();
+
 
         scanner.close();    
     }

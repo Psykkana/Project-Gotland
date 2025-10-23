@@ -35,8 +35,35 @@ public class Floor {
 
         // Floor 1
         if (floorNum == 1) {
-            grid[yAxis - 1][10] = '^';  
-            grid[yAxis - 1][11] = 'v';    
+            grid[yAxis - 1][10] = '^';    // Entrance
+            grid[yAxis - 1][11] = 'v';    // Exit
+
+            grid[20][1] = 'B';            // Basket Station
+            grid[20][20] = 'P';           // Pushcart Station
+
+            grid[18][1] = '#';            // Wall
+            grid[18][2] = 'R';            // Checkout / Register
+            grid[18][3] = '#';            // Wall
+            grid[18][4] = 'R';            // Checkout / Register  
+            grid[18][5] = '#';            // Wall
+            grid[18][6] = 'R';            // Checkout / Register
+            grid[18][7] = '#';            // Wall
+            grid[18][8] = 'R';            // Checkout / Register 
+
+            grid[17][10] = '#';            // Wall
+            grid[17][11] = '#';            // Wall
+            grid[18][10] = '#';            // Wall
+            grid[18][11] = '#';            // Wall            
+
+            grid[18][13] = 'R';            // Checkout / Register
+            grid[18][14] = '#';            // Wall
+            grid[18][15] = 'R';            // Checkout / Register  
+            grid[18][16] = '#';            // Wall
+            grid[18][17] = 'R';            // Checkout / Register
+            grid[18][18] = '#';            // Wall
+            grid[18][19] = 'R';            // Checkout / Register             
+            grid[18][20] = '#';            // Wall
+
         }
         // Place else here for Floor 2
 

@@ -13,13 +13,11 @@ public class Supermarket {
 
     private boolean running;    
 
-    
-
     public void initialize() {
         System.out.println("Initializing Supermarket Simulation...");
         Floor GroundFloor = new Floor();
-
         System.out.println("Initializing Map...");
+        System.out.println("=================================================");        
         GroundFloor.initializeMap(1);   // Floor 1
 
         GroundFloor.printMap();
