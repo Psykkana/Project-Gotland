@@ -1,6 +1,7 @@
 /*
- *  Specifies what kind of item a product is
- *  Includes its display requirements, serial prefix, and restrictions
+ *  ProductType Class
+ *      Specifies what kind of item a product is
+ *      Includes its display requirements, serial prefix, and restrictions
  * 
  */
 

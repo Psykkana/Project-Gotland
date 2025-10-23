@@ -1,6 +1,6 @@
 /*
  *  Floor class
- *      Prints the floor
+ *      Initializes and prints the floor
  *      Getter and setters for specific tiles
  * 
  */
@@ -32,15 +32,15 @@ public class Floor {
                     y == RIGHT_ROW) {
                     grid[x][y] = '#';  // the walls
                 } else {
-                    grid[x][y] = ' ';               
+                    grid[x][y] = ' ';  // empty space             
                 }
             }
         }
 
         // Floor 1 (get ready to scroll)
         if (floorNum == 1) {
-            grid[yAxis - 1][10] = '^';    // Entrance
-            grid[yAxis - 1][11] = 'v';    // Exit
+            grid[yAxis - 1][10] = 'v';    // Exit
+            grid[yAxis - 1][11] = '^';    // Entrance
 
             grid[20][1] = 'B';            // Basket Station
             grid[20][20] = 'P';           // Pushcart Station
@@ -196,12 +196,11 @@ public class Floor {
         }        
     }
 
-    public char getTile(int x, int y) {
+    public char getTile(int y, int x) {
         return grid[x][y];
     }
 
-    public void setTile(int x, int y, char setChar) {
+    public void setTile(int y, int x, char setChar) {
         grid[x][y] = setChar;
-
     }
 }

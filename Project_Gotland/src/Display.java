@@ -13,14 +13,35 @@ import java.util.ArrayList;
 
 public class Display {
 
-    private DisplayType type;
+    private String displayName;
+    private DisplayType type; 
     private ArrayList<Product> productList;
     private Address address;
     
     // Constructor
-    public Display(DisplayType type, ArrayList<Product> productList) {
+    public Display(String displayName, DisplayType type, Address address) {
+        this.displayName = displayName;
         this.type = type;
-        this.productList = productList;
+        this.address = address;
     }
     
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
+    public DisplayType getType() {
+        return this.type;
+    }
+
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public int getRow() {
+        return this.address.getRow();
+    }
+
+    public int getCol() {
+        return this.address.getCol();
+    }
 }
