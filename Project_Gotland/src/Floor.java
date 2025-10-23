@@ -7,10 +7,14 @@
 
 public class Floor {
 
-    private String floorLevel;
     private final int xAxis = 22;
     private final int yAxis = 22;
+    private final int TOP_ROW = 0;
+    private final int BOT_ROW = 21;
+    private final int LEFT_COL = 0;
+    private final int RIGHT_ROW = 21;
     private char[][] grid;
+    private String floorLevel;
 
     public Floor() {
         this.floorLevel = floorLevel;
@@ -22,11 +26,10 @@ public class Floor {
         // Fill 22x22 grid
         for (int x = 0; x < yAxis; x++) {   // for rows
             for (int y = 0; y < xAxis; y++) {   //  for columns
-                if (x == 0 ||           // top
-                    x == xAxis - 1 ||   // bottom
-                    y == 0 ||           // left
-                    y == yAxis -1       // right
-                ) {
+                if (x == TOP_ROW ||          
+                    x == BOT_ROW ||   
+                    y == LEFT_COL ||           
+                    y == RIGHT_ROW) {
                     grid[x][y] = '#';  // the walls
                 } else {
                     grid[x][y] = ' ';               
