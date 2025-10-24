@@ -86,7 +86,7 @@ public class Shopper {
 
     public void moveLEFT(Floor floor) {
         int moveLEFT = xAxis - 1;
-        if (floor.collisionCheck(moveLEFT, yAxis, floor)) {
+        if (floor.collisionCheck(yAxis, moveLEFT, floor)) {
             xAxis = moveLEFT;
             facing = Direction.LEFT;            
         }
@@ -94,7 +94,7 @@ public class Shopper {
 
     public void moveRIGHT(Floor floor) {
         int moveRIGHT = xAxis + 1;
-        if (floor.collisionCheck(moveRIGHT, yAxis, floor)) {
+        if (floor.collisionCheck(yAxis, moveRIGHT, floor)) {
             xAxis = moveRIGHT;
             facing = Direction.RIGHT;            
         }

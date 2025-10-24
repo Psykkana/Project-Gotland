@@ -255,7 +255,7 @@ public class Floor {
     }
 
     // Get or set specific tile on the grid
-    public char getTile(int x, int y) {
+    public char getTile(int y, int x) {
         return grid[y][x];
     }
 
