@@ -9,16 +9,22 @@ public class Supermarket {
     // Fields
     private Floor floor;       // The supermarket floor
     private boolean running;   // Indicates if the simulation is active
+    private final int xSpawnPoint = 11;
+    private final int ySpawnPoint = 20;
 
     // Constructor
     public Supermarket() {
         this.running = false;
     }
 
+    public static void displayDivider() {
+        System.out.println("=================================================");
+    }
+
     // Initialize supermarket and contents
     public void initialize() {
         System.out.println("Initializing Supermarket Simulation...");
-        System.out.println("=================================================");
+        displayDivider();
 
         // Create floor
         floor = new Floor("Ground Floor");
@@ -72,6 +78,23 @@ public class Supermarket {
         running = true;
     }
 
+    public void startSimulation(String shopperName, int shopperAge) {
+        if (!running) {
+            System.out.println("Simulation not initialized. Run initialize() first.");
+            return;
+        }
+
+        // Create new shopper object
+        Shopper shopper = new Shopper(shopperName, shopperAge, ySpawnPoint, xSpawnPoint);
+
+        System.out.println("Welcome " + shopperName);        
+        displayDivider();
+
+        floor.printMap();
+    }
+
+
+
     // Run simulation demo (simple sample interaction)
     public void runDemo() {
         if (!running) {
@@ -80,7 +103,7 @@ public class Supermarket {
         }
 
         System.out.println("\n=== Simulation Demo ===");
-        Shopper shopper = new Shopper("Anna", 65); // senior shopper
+        Shopper shopper = new Shopper("Anna", 65, ySpawnPoint, xSpawnPoint); // senior shopper
 
         // Interact with basket station
         for (Service s : floor.getServices()) {
@@ -110,10 +133,10 @@ public class Supermarket {
         }
     }
 
-    // Main method for testing
-    public static void main(String[] args) {
-        Supermarket supermarket = new Supermarket();
-        supermarket.initialize();
-        supermarket.runDemo();
-    }
+    // // Main method for testing
+    // public static void main(String[] args) {
+    //     Supermarket supermarket = new Supermarket();
+    //     supermarket.initialize();
+    //     supermarket.runDemo();
+    // }
 }

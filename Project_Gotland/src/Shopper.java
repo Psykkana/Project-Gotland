@@ -4,20 +4,33 @@ import java.util.ArrayList;
 
 public class Shopper {
 
+    // Direction enum
+    public enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+
     // Fields
     private String name;
     private int age;
     private Equipment equipment;               // Either a Cart or Basket (or none)
     private ArrayList<Product> carriedProducts; // Products currently held
     private boolean checkedOut;                // True if shopper has completed checkout
+    private Direction facing;
+    private int xAxis;
+    private int yAxis;
 
     // Constructor
-    public Shopper(String name, int age) {
+    public Shopper(String name, int age, int yAxis, int xAxis) {
         this.name = name;
         this.age = age;
         this.carriedProducts = new ArrayList<>();
         this.checkedOut = false;
         this.equipment = null; // starts with no equipment (in this case its null)
+
+        // For coordinates and direction
+        this.xAxis = xAxis;
+        this.yAxis = yAxis;   
+        this.facing= Direction.UP;             
     }
 
     // Getters
@@ -40,6 +53,19 @@ public class Shopper {
     public ArrayList<Product> getCarriedProducts() {
         return this.carriedProducts;
     }
+
+    // Facing and Location getters
+    public int getXAxis() {
+        return this.xAxis;
+    }
+
+    public int getYAxis() {
+        return this.yAxis;
+    }
+
+    public Direction getFacing() {
+        return this.facing;
+    }    
 
     // Assign equipment (cart or basket)
     public void setEquipment(Equipment equipment) {
