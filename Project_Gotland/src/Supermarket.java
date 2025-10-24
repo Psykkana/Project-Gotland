@@ -75,7 +75,7 @@ public class Supermarket {
     // Run simulation demo (simple sample interaction)
     public void runDemo() {
         if (!running) {
-            System.out.println("❌ Simulation not initialized. Run initialize() first.");
+            System.out.println("Simulation not initialized. Run initialize() first.");
             return;
         }
 

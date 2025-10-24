@@ -39,10 +39,10 @@ public class Service {
                     float total = shopper.getTotalPrice();
                     float discounted = shopper.getDiscountedPrice();
 
-                    System.out.println("🧾 " + shopper.getName() + " is checking out...");
-                    System.out.println("Total: ₱" + total);
+                    System.out.println(shopper.getName() + " is checking out...");
+                    System.out.println("Total: PHP" + total);
                     if (discounted < total) {
-                        System.out.println("Senior discount applied! Discounted total: ₱" + discounted);
+                        System.out.println("Senior discount applied! Discounted total: PHP" + discounted);
                     }
                     shopper.checkout();
                 } else {
@@ -53,7 +53,7 @@ public class Service {
             case "basket station":
                 if (shopper.getEquipment() == null) {
                     shopper.setEquipment(new Basket());
-                    System.out.println(shopper.getName() + " picked up a basket 🧺");
+                    System.out.println(shopper.getName() + " picked up a basket");
                 } else {
                     System.out.println(shopper.getName() + " already has equipment.");
                 }
@@ -62,7 +62,7 @@ public class Service {
             case "cart station":
                 if (shopper.getEquipment() == null) {
                     shopper.setEquipment(new Cart());
-                    System.out.println(shopper.getName() + " picked up a cart 🛒");
+                    System.out.println(shopper.getName() + " picked up a cart");
                 } else {
                     System.out.println(shopper.getName() + " already has equipment.");
                 }
