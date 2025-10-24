@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 
-
+/*
+ *  Shopper Class
+ *      Vital to the function of the whole simulation
+ *      Represents the user, and allows them to conduct actions (moving, viewing, etc.)
+ * 
+ */
 
 public class Shopper {
 
@@ -115,6 +120,78 @@ public class Shopper {
 
     public void lookRIGHT() {
         this.facing = Direction.RIGHT;
+    }
+
+    // Check the tile the user is facing
+    public int[] checkFacingTile() {
+        int xFacing = xAxis;
+        int yFacing = yAxis;
+
+        switch (facing) {
+            case UP:
+                yFacing--;
+                break;
+            case DOWN:
+                yFacing++;
+                break;
+            case LEFT:
+                xFacing--;
+                break;
+            case RIGHT:
+                xFacing++;
+                break;
+        }
+
+        return new int[] {yFacing, xFacing};
+    }
+
+    // To let the shopper interact with what they are facing per checkFacingTile
+    // Where actions execute
+    public void interact(Floor floor) {
+        // Grab the coordinates
+        int[] targetTile = checkFacingTile();
+        int xFacing = targetTile[0];
+        int yFacing = targetTile[1];       
+
+        // Get the type of object that the user is looking at
+        char tile = floor.getTile(yFacing, xFacing);
+
+        switch (tile) {
+            case 'B':           // Basket
+
+                break;
+            case 'P':           // Push Carts
+
+                break;
+            case 'R':           // Cash Checkout or Register
+
+                break;
+            case 'i':           // Product Search
+
+                break;
+            case 'S':           // Stairs
+            
+                break;
+            case 's':           // Shelves
+
+                break;
+            case 'T':           // Tables
+
+                break;
+            case 'c':           // Chilled counter
+
+                break;
+            case 'v':           // Exit
+
+                break;
+            case '^':           // Entrance
+                System.out.println("You are already in the supermarket");
+                break;
+
+            default:
+                System.out.println("There's nothing here");
+        }
+
     }
 
     // Assign equipment (cart or basket)
