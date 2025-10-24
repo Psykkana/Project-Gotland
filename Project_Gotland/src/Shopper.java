@@ -67,12 +67,45 @@ public class Shopper {
         return this.facing;
     }    
 
+    // Movement methods
+    public void moveUP(Floor floor) {
+        int moveUP = yAxis - 1;
+        if (floor.collisionCheck(moveUP, xAxis, floor)) {
+            yAxis = moveUP;
+            facing = Direction.UP;            
+        }
+    }
+
+    public void moveDOWN(Floor floor) {
+        int moveDOWN = yAxis + 1;
+        if (floor.collisionCheck(moveDOWN, xAxis, floor)) {
+            yAxis = moveDOWN;
+            facing = Direction.DOWN;            
+        }
+    }    
+
+    public void moveLEFT(Floor floor) {
+        int moveLEFT = xAxis - 1;
+        if (floor.collisionCheck(moveLEFT, yAxis, floor)) {
+            xAxis = moveLEFT;
+            facing = Direction.LEFT;            
+        }
+    }
+
+    public void moveRIGHT(Floor floor) {
+        int moveRIGHT = xAxis + 1;
+        if (floor.collisionCheck(moveRIGHT, yAxis, floor)) {
+            xAxis = moveRIGHT;
+            facing = Direction.RIGHT;            
+        }
+    }
+
     // Assign equipment (cart or basket)
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
     }
 
-  
+    // Product related methods
     public boolean addProduct(Product product) {
         if (equipment != null && equipment.hasSpace()) {
             return equipment.addProduct(product);

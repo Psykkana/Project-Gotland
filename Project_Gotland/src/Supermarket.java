@@ -4,6 +4,8 @@
  * Responsible for initializing floors, displays, products, and services.
  */
 
+import java.util.Scanner;
+
 public class Supermarket {
 
     // Fields
@@ -79,6 +81,8 @@ public class Supermarket {
     }
 
     public void startSimulation(String shopperName, int shopperAge) {
+        Scanner scanner = new Scanner(System.in);
+        
         if (!running) {
             System.out.println("Simulation not initialized. Run initialize() first.");
             return;
@@ -90,10 +94,39 @@ public class Supermarket {
         System.out.println("Welcome " + shopperName);        
         displayDivider();
 
-        floor.printMap();
+        while (running) {
+            floor.printMapAndShopper(shopper);
+            System.out.println("    W/A/S/D to Move, I/J/K/L to Look");
+            System.out.print("    Enter Action > ");
+            String input = scanner.nextLine().trim().toUpperCase(); // Make inputs uppercase
+
+            // Check user input
+            if (input.isBlank()) {
+                continue;   // Jumps to next iteration (ie restarts loop)
+            }
+
+            char cmd = input.charAt(0);
+            inputHandler(cmd, shopper);
+        }
     }
 
-
+    private void inputHandler(char input, Shopper shopper) {
+        // Facing direction
+        switch (input) {
+            case 'W': 
+                shopper.moveUP(floor);
+                break;
+            case 'A':
+                shopper.moveLEFT(floor);
+                break;
+            case 'S':
+                shopper.moveDOWN(floor);
+                break;
+            case 'D':
+                shopper.moveRIGHT(floor);
+                break;
+        }
+    }
 
     // Run simulation demo (simple sample interaction)
     public void runDemo() {

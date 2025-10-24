@@ -265,6 +265,9 @@ public class Floor {
 
     // check if the tile is empty
     public boolean collisionCheck(int y, int x, Floor floor) {
+        if (y < 0 || y >= 22 || x < 0 || x >= 22) {
+            return false;
+        }
         char tile = floor.getTile(y, x);
         return tile == ' ';
     }    
