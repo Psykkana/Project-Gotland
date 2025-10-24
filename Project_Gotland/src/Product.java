@@ -6,8 +6,8 @@
  */
 public class Product {
     
-    private String serialNumber;    // ex: FRUXXXXX
-    private String name;            // Apple, Orange, Banana
+    private String serialNumber;    // FRUXXXXX and etc
+    private String name;            // name of products
     private float price;
     private ProductType type;
 

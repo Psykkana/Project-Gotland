@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Scanner;
 /*
  *  Shopper Class
  *      Vital to the function of the whole simulation
@@ -148,69 +148,176 @@ public class Shopper {
     // To let the shopper interact with what they are facing per checkFacingTile
     // Where actions execute
     public void interact(Floor floor) {
-        // Grab the coordinates
-        int[] targetTile = checkFacingTile();
-        int xFacing = targetTile[0];
-        int yFacing = targetTile[1];       
+    int[] targetTile = checkFacingTile();
+    int yFacing = targetTile[0];
+    int xFacing = targetTile[1];       
 
-        // Get the type of object that the user is looking at
-        char tile = floor.getTile(yFacing, xFacing);
+    // Check map boundaries
+    if (yFacing < 0 || yFacing >= 22 || xFacing < 0 || xFacing >= 22) {
+        System.out.println("You can't interact outside the map!");
+        return;
+    }
 
-        switch (tile) {
-            case 'B':           // Basket
+    char tile = floor.getTile(yFacing, xFacing);
 
-                break;
-            case 'P':           // Push Carts
+    switch (tile) {
+        case 'B':   // Basket Station
+            System.out.println("You approach a Basket Station.");
+            new Service("Basket Station", new Address("GF", "Entrance", 0, 2)).interact(this);
+            break;
 
-                break;
-            case 'R':           // Cash Checkout or Register
+        case 'P':   // Cart Station
+            System.out.println("You approach a Cart Station.");
+            new Service("Cart Station", new Address("GF", "Entrance", 0, 3)).interact(this);
+            break;
 
-                break;
-            case 'i':           // Product Search
+        case 'R':   // Checkout counter
+            System.out.println("You approach the Checkout Counter.");
+            new Service("Checkout", new Address("GF", "Front", 0, 1)).interact(this);
+            break;
 
-                break;
-            case 'S':           // Stairs
-            
-                break;
-            case 's':           // Shelves
+        case 'v':   // Exit
+            System.out.println("You approach the Exit.");
+            new Service("Exit", new Address("GF", "Front", 0, 3)).interact(this);
+            if(hasCheckedOut()) {
+                System.out.println("Do you want to restart the simulator? Type Y or N: ");
+                Scanner scanner = new Scanner(System.in);
+                String response = scanner.nextLine().trim().toUpperCase();
+                if(response.equals("Y")) {
+                    Driver.restartGame();
+                } else {
+                    System.out.println("Thank you for shopping!");
+                    System.exit(0);
+                }
+            }
+            break;
 
-                break;
-            case 'T':           // Tables
+        case 's':   // Shelf / display
+        case 'T':   // Table
+        case 'c':   // Chilled counter
+            System.out.println("You check the display for items...");
+            interactWithDisplay(floor);
+            break;
 
-                break;
-            case 'c':           // Chilled counter
+        default:
+            System.out.println("There's nothing interesting here.");
+            break;
+    }
+}
 
-                break;
-            case 'v':           // Exit
+        // Handles display interaction (picking up a product)
+    private void interactWithDisplay(Floor floor) {
+        int[] facing = checkFacingTile();
+        int yFacing = facing[0];
+        int xFacing = facing[1];
 
-                break;
-            case '^':           // Entrance
-                System.out.println("You are already in the supermarket");
-                break;
+        Display targetDisplay = null;
+        double minDistance = Double.MAX_VALUE;
 
-            default:
-                System.out.println("There's nothing here");
+        // Find the closest display based on (y,x) coordinates
+        for (Display d : floor.getDisplays()) {
+            int dy = d.getY();
+            int dx = d.getX();
+
+            // Compute distance between facing tile and display
+            double distance = Math.sqrt(Math.pow(dy - yFacing, 2) + Math.pow(dx - xFacing, 2));
+
+            if (distance < 2.0 && distance < minDistance) { // within 1 tile distance
+                targetDisplay = d;
+                minDistance = distance;
+            }
         }
 
+        if (targetDisplay == null) {
+            System.out.println("There's no display in front of you.");
+            return;
+        }
+
+        if (!targetDisplay.getProducts().isEmpty()) {
+            Product product = targetDisplay.getProducts().get(0);
+            if (addProduct(product)) {
+                System.out.println("You picked up: " + product.getName() +
+                        " from " + targetDisplay.getType().getType() +
+                        " at " + targetDisplay.getAddress());
+                targetDisplay.removeProduct(product);
+            }
+        } else {
+            System.out.println("This display is empty.");
+        }
     }
+        // Return one product back to the nearest display
+    public void dropProduct(Floor floor) {
+        int[] facing = checkFacingTile();
+        int yFacing = facing[0];
+        int xFacing = facing[1];
+
+        Display targetDisplay = null;
+        for (Display d : floor.getDisplays()) {
+            if (Math.abs(d.getYPos() - yFacing) <= 1 && Math.abs(d.getXPos() - xFacing) <= 1) {
+                targetDisplay = d;
+                break;
+            }
+        }
+
+        if (targetDisplay == null) {
+            System.out.println("No display nearby to return the product to.");
+            return;
+        }
+
+        Product toReturn = null;
+        if (!carriedProducts.isEmpty()) {
+            toReturn = carriedProducts.remove(carriedProducts.size() - 1);
+        } else if (equipment != null && !equipment.getContents().isEmpty()) {
+            ArrayList<Product> contents = equipment.getContents();
+            toReturn = contents.remove(contents.size() - 1);
+        }
+
+        if (toReturn != null) {
+            targetDisplay.addProduct(toReturn);
+            System.out.println("Returned " + toReturn.getName() + " to " + targetDisplay.getType().getType());
+        } else {
+            System.out.println("You have no product to return.");
+        }
+    }
+
+
 
     // Assign equipment (cart or basket)
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;
+        //transfer hand held items onto equipment
+        if(!carriedProducts.isEmpty()) {
+            for(Product p : new ArrayList<>(carriedProducts)) {
+                if(this.equipment.hasSpace()) {
+                    this.equipment.addProduct(p);
+                    carriedProducts.remove(p);
+                } else {
+                    System.out.println("Not enough space in " + this.equipment.getClass().getSimpleName() + " for all hand items." );
+                    break;
+                }
+            }
+            System.out.println("Transferred hand-carried items into " + this.equipment.getClass().getSimpleName() + ".");
+        }
     }
 
     // Product related methods
     public boolean addProduct(Product product) {
-        if (equipment != null && equipment.hasSpace()) {
-            return equipment.addProduct(product);
-        } 
-        else if (equipment == null) {
+        if(equipment != null) {
+            if(equipment.hasSpace()) {
+                return equipment.addProduct(product);
+            } else {
+                System.out.println("Your " + equipment.getClass().getSimpleName() + " is full!");
+                return false;
+            }
+        }
+        if(carriedProducts.size() < 2) {
             carriedProducts.add(product);
             return true;
         } else {
-            System.out.println("cant carry product. No equipment space.");
-            return false;
-        }
+            System.out.println("You can't carry more than 2 products by hand. Please get a basket or cart");
+        } return false;
+
+
     }
 
     public void removeProduct(Product product) {
@@ -250,8 +357,65 @@ public class Shopper {
         return total;
     }
 
+        // Returns total item count in hands + equipment
+    public int getTotalItemCount() {
+        int total = carriedProducts.size();
+        if (equipment != null) {
+            total += equipment.getContents().size();
+        }
+        return total;
+    }
+
+
     public String toString() {
         String equipType = (equipment == null) ? "None" : equipment.getClass().getSimpleName();
         return "Shopper: " + name + " (" + age + " y/o, Equipment: " + equipType + ")";
+ 
     }
+
+    // VIEW PRODUCTS: Lists all unique items the shopper is carrying or has in their equipment
+    public void viewChosenProducts() {
+        System.out.println("\n=====================");
+        System.out.println("Products in " + (equipment == null ? "hands" : equipment.getClass().getSimpleName().toUpperCase()));
+        System.out.println("=====================");
+
+        // Combine all products (hand + equipment)
+        ArrayList<Product> allProducts = new ArrayList<>();
+        allProducts.addAll(carriedProducts);
+        if (equipment != null) {
+            allProducts.addAll(equipment.getContents());
+        }
+
+        if (allProducts.isEmpty()) {
+            System.out.println("No products selected yet.");
+            return;
+        }
+
+        // Track product counts and subtotals
+        java.util.HashMap<String, Integer> quantityMap = new java.util.HashMap<>();
+        java.util.HashMap<String, Float> subtotalMap = new java.util.HashMap<>();
+
+        for (Product p : allProducts) {
+            String key = p.getName();
+            quantityMap.put(key, quantityMap.getOrDefault(key, 0) + 1);
+            subtotalMap.put(key, subtotalMap.getOrDefault(key, 0f) + p.getPrice());
+        }
+
+        // Print neatly
+        System.out.printf("%-25s %-10s %-10s%n", "Product", "Qty", "Subtotal (PHP)");
+        System.out.println("---------------------------------------------");
+
+        float total = 0;
+        for (String name : quantityMap.keySet()) {
+            int qty = quantityMap.get(name);
+            float subtotal = subtotalMap.get(name);
+            total += subtotal;
+            System.out.printf("%-25s %-10d %-10.2f%n", name, qty, subtotal);
+        }
+
+        System.out.println("---------------------------------------------");
+        System.out.printf("TOTAL: PHP%.2f%n", total);
+        System.out.println("=====================\n");
+    }
+
 }

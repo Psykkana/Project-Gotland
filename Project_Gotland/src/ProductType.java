@@ -11,7 +11,7 @@ public class ProductType {
     private DisplayType displayType;    // for where it can be displayed
     private boolean restrictedUnderage;
     private boolean discountEligible;
-    // For + 60 discount for edible/drinkables (excludes alcohol)
+    // For + 60 discount for edible/drinkables (not including alcohol)
     private boolean foodConsumable;  
     private boolean drinkConsumable;     
 

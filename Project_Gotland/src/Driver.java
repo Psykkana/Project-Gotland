@@ -13,6 +13,11 @@ public class Driver {
         System.out.println("=================================================");
     }
 
+    public static void restartGame() {
+        System.out.flush();
+        main(new String[0]);
+    }
+
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

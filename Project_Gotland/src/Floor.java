@@ -3,22 +3,18 @@ import java.util.ArrayList;
 /*
  * Floor Class
  * Represents a single supermarket floor.
- * Responsible for maintaining the 22x22 grid, displays, and services.
+ * has the 22x22 grid, displays, and services.
  */
 
 public class Floor {
 
     // Fields
-    private String floorLevel;              // e.g. "GF", "2F"
-    private final int xAxis = 22;           // Columns
+    private String floorLevel;              // the ground floor and second
+    private final int xAxis = 22;           // columns
     private final int yAxis = 22;           // Rows
-    private char[][] grid;                  // Visual representation
+    private char[][] grid;                  // visuals
     private ArrayList<Display> displays;    // Displays located on this floor
     private ArrayList<Service> services;    // Services like checkout, exit, stations
-
-    // Map constants (TO BE FINISHED LATER)
-    private final char wall = '#';
-    private final char checkout = 'R';
 
     // Constructor
     public Floor(String floorLevel) {

@@ -16,13 +16,25 @@ public class Display {
     private DisplayType type;
     private Address address;
     private ArrayList<Product> productList;
+    private int xPos;
+    private int yPos;
     // NOTE: How do we implement an address?
     
     // Constructor
-    public Display(DisplayType type, Address address) {
+    public Display(DisplayType type, Address address, int yPos, int xPos) {
         this.type = type;
         this.address = address;
+        this.yPos = yPos;
+        this.xPos = xPos;
         this.productList = new ArrayList<>();
+    }
+
+    public int getX() {
+        return this.xPos;
+    }
+
+    public int getY() {
+        return this.yPos;
     }
 
     public DisplayType getType() {

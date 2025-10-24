@@ -36,29 +36,102 @@ public class Supermarket {
         // Create display types
         DisplayType shelfType = new DisplayType("Shelf", 4, 5);
         DisplayType fridgeType = new DisplayType("Refrigerator", 3, 4);
+        DisplayType wallType = new DisplayType("Wall Display", 2, 6);
 
         // Create product types
-        ProductType fruitType = new ProductType("FRU", "Fruit", shelfType, false, true, true, false);
-        ProductType meatType = new ProductType("MEA", "Meat", fridgeType, false, true, true, false);
+        
+        // === PRODUCT TYPES ===
+        ProductType fruitType   = new ProductType("FRU", "Fruit", shelfType, false, true, true, false);
+        ProductType meatType    = new ProductType("MEA", "Meat", fridgeType, false, true, true, false);
+        ProductType dairyType   = new ProductType("DAI", "Dairy", fridgeType, false, true, true, false);
+        ProductType cannedType  = new ProductType("CAN", "Canned Goods", shelfType, false, true, true, false);
+        ProductType snackType   = new ProductType("SNA", "Snack", shelfType, false, true, true, false);
+        ProductType drinkType   = new ProductType("DRI", "Drink", fridgeType, false, true, false, true);
+        ProductType veggieType  = new ProductType("VEG", "Vegetable", shelfType, false, true, true, false);
+        ProductType cleanType   = new ProductType("CLN", "Cleaning Supply", shelfType, false, false, false, false);
 
         // Create products
-        Product apple = new Product("FRU001", "Apple", 15.0f, fruitType);
-        Product banana = new Product("FRU002", "Banana", 12.0f, fruitType);
-        Product pork = new Product("MEA001", "Pork", 120.0f, meatType);
+        Product apple    = new Product("FRU001", "Apple", 15.0f, fruitType);
+        Product banana   = new Product("FRU002", "Banana", 12.0f, fruitType);
+        Product orange   = new Product("FRU003", "Orange", 10.0f, fruitType);
 
-        // Create displays with addresses
-        Address fruitAddr = new Address("GF", "Aisle", 1, 1);
-        Address meatAddr = new Address("GF", "Aisle", 2, 1);
+        Product pork     = new Product("MEA001", "Pork", 120.0f, meatType);
+        Product beef     = new Product("MEA002", "Beef", 160.0f, meatType);
+        Product chicken  = new Product("MEA003", "Chicken", 100.0f, meatType);
 
-        Display fruitDisplay = new Display(shelfType, fruitAddr);
-        Display meatDisplay = new Display(fridgeType, meatAddr);
+        Product milk     = new Product("DAI001", "Milk", 50.0f, dairyType);
+        Product cheese   = new Product("DAI002", "Cheese", 80.0f, dairyType);
+        Product yogurt   = new Product("DAI003", "Yogurt", 45.0f, dairyType);
+
+        Product tuna     = new Product("CAN001", "Tuna", 40.0f, cannedType);
+        Product beans    = new Product("CAN002", "Baked Beans", 30.0f, cannedType);
+        Product corned   = new Product("CAN003", "Corned Beef", 55.0f, cannedType);
+
+        Product chips    = new Product("SNA001", "Chips", 25.0f, snackType);
+        Product cookies  = new Product("SNA002", "Cookies", 35.0f, snackType);
+        Product biscuits = new Product("SNA003", "Biscuits", 30.0f, snackType);
+
+        Product soda     = new Product("DRI001", "Soda", 20.0f, drinkType);
+        Product juice    = new Product("DRI002", "Juice", 25.0f, drinkType);
+        Product water    = new Product("DRI003", "Water", 15.0f, drinkType);
+
+        Product lettuce  = new Product("VEG001", "Lettuce", 18.0f, veggieType);
+        Product tomato   = new Product("VEG002", "Tomato", 22.0f, veggieType);
+        Product carrot   = new Product("VEG003", "Carrot", 20.0f, veggieType);
+
+        Product soap     = new Product("CLN001", "Soap", 40.0f, cleanType);
+        Product detergent= new Product("CLN002", "Detergent", 70.0f, cleanType);
+        Product bleach   = new Product("CLN003", "Bleach", 90.0f, cleanType);
+
+        Display fruitDisplay   = new Display(shelfType, new Address("GF", "Aisle", 12, 1), 13, 18); // fruits
+        Display snackDisplay   = new Display(shelfType, new Address("GF", "Aisle", 11, 1), 13, 14); // snacks
+        Display dairyDisplay   = new Display(fridgeType, new Address("GF", "Aisle", 10, 1), 12, 10); // dairy
+        Display cleanDisplay   = new Display(shelfType, new Address("GF", "Aisle", 9, 1), 12, 6);   // cleaning
+        Display cannedDisplay  = new Display(shelfType, new Address("GF", "Aisle", 8, 1), 12, 2);   // canned
+        Display drinkDisplay   = new Display(wallType, new Address("GF", "Wall", 1, 1), 1, 17);     // drinks
+        Display meatDisplay    = new Display(fridgeType, new Address("GF", "Wall", 2, 1), 1, 9);    // meats
+        Display veggieDisplay  = new Display(shelfType, new Address("GF", "Wall", 3, 1), 1, 3);     // vegetables
 
         fruitDisplay.addProduct(apple);
         fruitDisplay.addProduct(banana);
+        fruitDisplay.addProduct(orange);
+
+        snackDisplay.addProduct(chips);
+        snackDisplay.addProduct(cookies);
+        snackDisplay.addProduct(biscuits);
+
+        dairyDisplay.addProduct(milk);
+        dairyDisplay.addProduct(cheese);
+        dairyDisplay.addProduct(yogurt);
+
+        cleanDisplay.addProduct(soap);
+        cleanDisplay.addProduct(detergent);
+        cleanDisplay.addProduct(bleach);
+
+        cannedDisplay.addProduct(tuna);
+        cannedDisplay.addProduct(beans);
+        cannedDisplay.addProduct(corned);
+
+        drinkDisplay.addProduct(soda);
+        drinkDisplay.addProduct(juice);
+        drinkDisplay.addProduct(water);
+
         meatDisplay.addProduct(pork);
+        meatDisplay.addProduct(beef);
+        meatDisplay.addProduct(chicken);
+
+        veggieDisplay.addProduct(lettuce);
+        veggieDisplay.addProduct(tomato);
+        veggieDisplay.addProduct(carrot);
 
         floor.addDisplay(fruitDisplay);
+        floor.addDisplay(snackDisplay);
+        floor.addDisplay(dairyDisplay);
+        floor.addDisplay(cleanDisplay);
+        floor.addDisplay(cannedDisplay);
+        floor.addDisplay(drinkDisplay);
         floor.addDisplay(meatDisplay);
+        floor.addDisplay(veggieDisplay);
 
         // Create services
         Address checkoutAddr = new Address("GF", "Front", 0, 1);
@@ -96,13 +169,17 @@ public class Supermarket {
 
         while (running) {
             floor.printMapAndShopper(shopper);
-            System.out.println("    W/A/S/D to Move, I/J/K/L to Look");
+            System.out.println("    W/A/S/D to Move, I/J/K/L to Look, SPACE to interact, V to view basket, X to drop item");
             System.out.print("    Enter Action > ");
-            String input = scanner.nextLine().trim().toUpperCase(); // Make inputs uppercase
+            String input = scanner.nextLine().toUpperCase(); // Make inputs uppercase
 
             // Check user input
-            if (input.isBlank()) {
+            if (input.equals(" ")) {
+                shopper.interact(floor);
                 continue;   // Jumps to next iteration (ie restarts loop)
+            }
+            if(input.isBlank()) {
+                continue;
             }
 
             char cmd = input.charAt(0);
@@ -138,6 +215,20 @@ public class Supermarket {
             case 'L':
                 shopper.lookRIGHT();
                 break; 
+
+            case ' ':
+                shopper.interact(floor);
+                break;
+            case 'V':
+                shopper.viewChosenProducts();
+                break;
+            case 'X':
+                shopper.dropProduct(floor);
+                break;
+
+            default:
+                System.out.println("Error");
+
         }
     }
 
