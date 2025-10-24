@@ -1,38 +1,13 @@
-public class Basket {
-    
-    private Equipment storage;
+/*
+ * Basket Class
+ * Represents a handheld basket for a shopper.
+ * Inherits from Equipment with smaller capacity.
+ */
 
+public class Basket extends Equipment {
+
+    // Constructor
     public Basket() {
-        storage = new Equipment(15);
+        super(15); // Basket capacity = 15 products
     }
-    //since it extends from equipment, put the same variables
-    public boolean addProduct(Product p) {
-        return storage.addProduct(p);
-    }
-    
-    public boolean removeProduct(Product p) {
-        return storage.removeProduct(p);
-    }
-
-    public boolean isFull() {
-        return storage.isFull();
-    }
-
-    public int getItemCount() {
-        return storage.getItemCount();
-    }
-    
-    public int getCapacity() {
-        return storage.getCapacity();
-    }
-
-    public void clear() {
-        storage.clear(); //to clear the equipment's list of products
-    } // for encapsulation
-    
-    public Equipment getStorage() {
-        return storage;
-    }
-
-
 }

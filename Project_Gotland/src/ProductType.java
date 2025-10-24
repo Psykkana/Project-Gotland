@@ -1,7 +1,6 @@
 /*
- *  ProductType Class
- *      Specifies what kind of item a product is
- *      Includes its display requirements, serial prefix, and restrictions
+ *  Specifies what kind of item a product is
+ *  Includes its display requirements, serial prefix, and restrictions
  * 
  */
 
@@ -28,4 +27,31 @@ public class ProductType {
         this.foodConsumable = foodConsumable;
         this.drinkConsumable = drinkConsumable;
     }
+
+    public String getSerialPrefix() {
+        return this.serialPrefix;
+    }
+    public String getTypeName() {
+        return this.typeName;
+    }
+    public DisplayType getDisplayType() {
+        return this.displayType;
+    }
+    public boolean isRestrictedUnderage() {
+        return this.restrictedUnderage;
+    }
+    public boolean isDiscountEligible() {
+        return this.discountEligible;
+    }
+    public boolean isFoodConsumable(){
+        return this.foodConsumable;
+    }
+    public boolean isDrinkConsumable(){
+        return this.drinkConsumable;
+    }
+
+    public String toString() {
+        return typeName + " (" + serialPrefix + ")";
+    }
+
 }

@@ -13,35 +13,46 @@ import java.util.ArrayList;
 
 public class Display {
 
-    private String displayName;
-    private DisplayType type; 
-    private ArrayList<Product> productList;
+    private DisplayType type;
     private Address address;
+    private ArrayList<Product> productList;
+    // NOTE: How do we implement an address?
     
     // Constructor
-    public Display(String displayName, DisplayType type, Address address) {
-        this.displayName = displayName;
+    public Display(DisplayType type, Address address) {
         this.type = type;
         this.address = address;
-    }
-    
-    public String getDisplayName() {
-        return this.displayName;
+        this.productList = new ArrayList<>();
     }
 
     public DisplayType getType() {
         return this.type;
     }
-
     public Address getAddress() {
         return this.address;
     }
-
-    public int getRow() {
-        return this.address.getRow();
+    public ArrayList<Product> getProducts() {
+        return this.productList;
     }
+    public boolean addProduct(Product product) {
+        int currentCount = productList.size();
+        int maxCapacity = type.getTotalCapacity();
 
-    public int getCol() {
-        return this.address.getCol();
+        if(currentCount < maxCapacity) {
+            productList.add(product);
+            return true;
+        } else {
+            System.out.println("No more space on this display: " + address);
+            return false;
+        }
+    }
+    public void removeProduct(Product product) {
+        productList.remove(product);
+    }
+    public boolean hasSpace() {
+        return productList.size() < type.getTotalCapacity();
+    }
+    public String toString() {
+        return "Display at " + address + " (" + type.getType() +") -" + productList.size() + "/" + type.getTotalCapacity() + " items";
     }
 }

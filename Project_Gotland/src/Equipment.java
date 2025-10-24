@@ -1,47 +1,55 @@
 import java.util.ArrayList;
 
-public class Equipment {
+/*
+ * Equipment Class (Abstract)
+ * Represents containers used by shoppers — carts and baskets.
+ * Each equipment has a fixed capacity and can hold multiple products.
+ */
 
-    private int nCapacity;
-    private ArrayList<Product> contents;
+public abstract class Equipment {
 
-    //the constrcutor
+    // Fields
+    private int capacity;                   // Max number of products
+    private ArrayList<Product> contents;    // Products inside
 
-    public Equipment(int nCapacity) {
-        this.nCapacity = nCapacity;
+    // Constructor
+    public Equipment(int capacity) {
+        this.capacity = capacity;
         this.contents = new ArrayList<>();
     }
 
-    //this method is to add a product if there is space
-
-    public boolean addProduct(Product p) {
-
-        if(contents.size() < nCapacity) {
-            contents.add(p);
-            return true;
-        }
-        return false; // full
-    }
-
-    public boolean removeProduct(Product p) {
-        return contents.remove(p);
-    }
-
-    public boolean isFull() {
-        return contents.size() >= capacity;
-    }
-
+    // Getters
     public int getCapacity() {
-        return capacity;
+        return this.capacity;
     }
-    
+
     public ArrayList<Product> getContents() {
-        return contents;
+        return this.contents;
     }
 
-    public int getItemCount() {
-        return contents.size();
+    // Adds a product if space allows
+    public boolean addProduct(Product product) {
+        if (contents.size() < capacity) {
+            contents.add(product);
+            return true;
+        } else {
+            System.out.println("Equipment full! Cannot add " + product.getName());
+            return false;
+        }
     }
 
+    // Removes a product
+    public void removeProduct(Product product) {
+        contents.remove(product);
+    }
 
+    // Checks if there’s still space
+    public boolean hasSpace() {
+        return contents.size() < capacity;
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + " (" + contents.size() + "/" + capacity + " items)";
+    }
 }

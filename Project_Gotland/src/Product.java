@@ -35,4 +35,8 @@ public class Product {
     public ProductType getType() {
         return this.type;
     }
+
+    public String toString(){
+        return "[" + serialNumber + "] " + name + " - PHP" + price +" (" + type.getTypeName() + ")";
+    }
 }

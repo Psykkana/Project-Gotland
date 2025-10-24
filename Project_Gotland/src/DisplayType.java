@@ -32,4 +32,8 @@ public class DisplayType {
         return tiers * capacityPerTier;
     }
 
+    public String toString() {
+        return typeName + " (" + tiers + " tiers, " + capacityPerTier + " capacity/tier)";
+    }
+
 }
