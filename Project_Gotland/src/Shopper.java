@@ -100,6 +100,23 @@ public class Shopper {
         }
     }
 
+    // Viewing methods
+    public void lookUP() {
+        this.facing = Direction.UP;
+    }
+
+    public void lookDOWN() {
+        this.facing = Direction.DOWN;
+    }
+
+    public void lookLEFT() {
+        this.facing = Direction.LEFT;
+    }
+
+    public void lookRIGHT() {
+        this.facing = Direction.RIGHT;
+    }
+
     // Assign equipment (cart or basket)
     public void setEquipment(Equipment equipment) {
         this.equipment = equipment;

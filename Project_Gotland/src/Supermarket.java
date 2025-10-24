@@ -111,8 +111,8 @@ public class Supermarket {
     }
 
     private void inputHandler(char input, Shopper shopper) {
-        // Facing direction
         switch (input) {
+            // Movement
             case 'W': 
                 shopper.moveUP(floor);
                 break;
@@ -125,6 +125,19 @@ public class Supermarket {
             case 'D':
                 shopper.moveRIGHT(floor);
                 break;
+            // Facing Direction
+            case 'I':
+                shopper.lookUP();
+                break;
+            case 'J':
+                shopper.lookLEFT();
+                break;                
+            case 'K':
+                shopper.lookDOWN();
+                break;
+            case 'L':
+                shopper.lookRIGHT();
+                break; 
         }
     }
 

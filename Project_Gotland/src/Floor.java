@@ -16,6 +16,10 @@ public class Floor {
     private ArrayList<Display> displays;    // Displays located on this floor
     private ArrayList<Service> services;    // Services like checkout, exit, stations
 
+    // Map constants (TO BE FINISHED LATER)
+    private final char wall = '#';
+    private final char checkout = 'R';
+
     // Constructor
     public Floor(String floorLevel) {
         this.floorLevel = floorLevel;
